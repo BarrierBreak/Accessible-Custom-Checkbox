@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox</title>
+
+  <style>
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.headingLevelOne {text-align: center;}
+ 
+#checkboxHeading {
+font-size:24px;margin: 50px auto 0 auto;text-align: center
+}
+
+.custom-chckbx {
+  padding: 7px 30px;
+  position: relative;
+  font-size: 18px;
+  color: #000;
+}
+
+.custom-chckbx:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 2px solid #0079bf;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.custom-chckbx[aria-checked="true"]:before {background-color:#0079bf;}
+
+.custom-chckbx[aria-checked="true"]:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 39px;
+  width: 6px;
+  height: 14px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.checkboxGroup {display: block;margin: 20px auto;width: 30%;}
+.custom-chckbx:focus {border:1px solid red}
+  </style>
+</head>
+
+<body>
+  <div class="new">
+    <h1 class="headingLevelOne">Accessible Custom Checkbox</h1>
+     <h2 id="checkboxHeading">Which web technologies do you know?</h2>
+    <div role="group" aria-labelledby="checkboxHeading " class="checkboxGroup">
+      <div class="custom-chckbx" 
+           role="checkbox"
+           aria-checked="true"
+           tabindex="0">
+        Javascript
+      </div>
+      <div class="custom-chckbx"  
+           role="checkbox"
+           aria-checked="false"
+           tabindex="0">
+        PHP
+      </div>
+      <div class="custom-chckbx"
+           role="checkbox"
+           aria-checked="false"
+           tabindex="0">
+        .Net
+      </div>
+    </div>
+  </div>
+  <script>
+    let checkboxes = document.querySelectorAll('.custom-chckbx');
+
+    for (let i = 0; i < checkboxes.length; i++) {
+      let checkbox = checkboxes[i];
+      checkbox.addEventListener("click", function(){
+        if(this.getAttribute("aria-checked") === "false") {
+          this.setAttribute("aria-checked", "true");
+        }
+        else {
+          this.setAttribute("aria-checked", "false");
+        }
+     });
+
+     checkbox.addEventListener("keydown", function(e){
+       if(e.keyCode == 32) {
+        if(this.getAttribute("aria-checked") === "false") {
+          this.setAttribute("aria-checked", "true");
+        }
+        else {
+          this.setAttribute("aria-checked", "false");
+        }
+       }
+     });
+    }
+  </script>
+</body>
+</html>
